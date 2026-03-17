@@ -1,62 +1,58 @@
 (function defineLayoutActions(global) {
   const namespace = global.YTCleaner || (global.YTCleaner = {});
   const {
-    hiddenAttribute,
-    hiddenReasonRightSidebar,
+    hideLeftSidebarAttribute,
     hideRightSidebarAttribute
   } = namespace.constants;
 
-  const SIDEBAR_SELECTORS = [
-    "#secondary",
-    "ytd-watch-flexy #secondary",
-    "ytd-watch-next-secondary-results-renderer"
-  ];
-
   function createLayoutActions() {
-    const processed = new WeakSet();
-
-    function findRightSidebar(root = document) {
-      for (const selector of SIDEBAR_SELECTORS) {
-        const node = root.querySelector(selector);
-        if (node) {
-          return node;
-        }
-      }
-
-      return null;
-    }
-
-    function hideRightSidebar(root = document) {
+    function setRootToggle(attribute, enabled) {
       const html = document.documentElement;
-      html.setAttribute(hideRightSidebarAttribute, "true");
+      const nextValue = enabled ? "true" : null;
+      const previousValue = html.getAttribute(attribute);
 
-      const sidebar = findRightSidebar(root);
-      if (!sidebar) {
+      if (nextValue === null) {
+        if (previousValue === null) {
+          return false;
+        }
+
+        html.removeAttribute(attribute);
+        return true;
+      }
+
+      if (previousValue === nextValue) {
         return false;
       }
 
-      if (
-        processed.has(sidebar) &&
-        sidebar.getAttribute(hiddenAttribute) === hiddenReasonRightSidebar
-      ) {
-        return false;
-      }
-
-      processed.add(sidebar);
-      sidebar.setAttribute(hiddenAttribute, hiddenReasonRightSidebar);
+      html.setAttribute(attribute, nextValue);
       return true;
     }
 
-    function reset(root = document) {
-      document.documentElement.removeAttribute(hideRightSidebarAttribute);
+    function setLeftSidebarHidden(enabled) {
+      return setRootToggle(hideLeftSidebarAttribute, enabled);
+    }
 
-      root
-        .querySelectorAll(`[${hiddenAttribute}="${hiddenReasonRightSidebar}"]`)
-        .forEach((node) => node.removeAttribute(hiddenAttribute));
+    function setRightSidebarHidden(enabled) {
+      return setRootToggle(hideRightSidebarAttribute, enabled);
+    }
+
+    function applyLayout({ hideLeftSidebar, hideRightSidebar }) {
+      const didChangeLeftSidebar = setLeftSidebarHidden(hideLeftSidebar);
+      const didChangeRightSidebar = setRightSidebarHidden(hideRightSidebar);
+
+      return {
+        didChangeLeftSidebar,
+        didChangeRightSidebar
+      };
+    }
+
+    function reset() {
+      setLeftSidebarHidden(false);
+      setRightSidebarHidden(false);
     }
 
     return {
-      hideRightSidebar,
+      applyLayout,
       reset
     };
   }

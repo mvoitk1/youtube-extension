@@ -5,28 +5,41 @@
   function createLayoutController({ getState, logger }) {
     const actions = namespace.layoutActions.createLayoutActions();
 
-    function shouldHideSidebar(state) {
-      return state.route === ROUTES.WATCH && Boolean(state.settings.layout.hideRightSidebar);
+    function getLayoutState(state) {
+      const isWatchRoute = state.route === ROUTES.WATCH;
+
+      return {
+        hideLeftSidebar: isWatchRoute && Boolean(state.settings.layout.hideLeftSidebar),
+        hideRightSidebar: isWatchRoute && Boolean(state.settings.layout.hideRightSidebar)
+      };
     }
 
     return {
       refresh() {
         const state = getState();
+        const layoutState = getLayoutState(state);
 
-        if (!shouldHideSidebar(state)) {
-          actions.reset(document);
+        if (!layoutState.hideLeftSidebar && !layoutState.hideRightSidebar) {
+          actions.reset();
           return;
         }
 
-        const didHideSidebar = actions.hideRightSidebar(document);
-        if (didHideSidebar) {
+        const result = actions.applyLayout(layoutState);
+
+        if (result.didChangeLeftSidebar) {
+          logger.log("layout:left-sidebar-hidden", {
+            route: state.route
+          });
+        }
+
+        if (result.didChangeRightSidebar) {
           logger.log("layout:right-sidebar-hidden", {
             route: state.route
           });
         }
       },
       stop() {
-        actions.reset(document);
+        actions.reset();
       }
     };
   }

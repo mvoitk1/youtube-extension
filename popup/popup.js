@@ -5,6 +5,7 @@
     adsAutoSkip: ["ads", "autoSkip"],
     adsMuteWhenAdPlaying: ["ads", "muteWhenAdPlaying"],
     adsCloseOverlays: ["ads", "closeOverlays"],
+    layoutHideLeftSidebar: ["layout", "hideLeftSidebar"],
     layoutHideRightSidebar: ["layout", "hideRightSidebar"],
     debugEnabled: ["debug", "enabled"]
   };

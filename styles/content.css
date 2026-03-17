@@ -2,16 +2,33 @@
   display: none !important;
 }
 
-[data-ytc-hidden="right-sidebar"] {
+html[data-ytc-hide-left-sidebar="true"] #guide,
+html[data-ytc-hide-left-sidebar="true"] ytd-guide-renderer,
+html[data-ytc-hide-left-sidebar="true"] tp-yt-app-drawer {
   display: none !important;
 }
 
-html[data-ytc-hide-right-sidebar="true"] ytd-watch-flexy #secondary,
-html[data-ytc-hide-right-sidebar="true"] #secondary[data-ytc-hidden="right-sidebar"] {
+html[data-ytc-hide-right-sidebar="true"] ytd-watch-flexy #secondary {
   display: none !important;
 }
 
+html[data-ytc-hide-left-sidebar="true"] ytd-watch-flexy[is-two-columns_],
+html[data-ytc-hide-right-sidebar="true"] ytd-watch-flexy[is-two-columns_] {
+  max-width: 100% !important;
+}
+
+html[data-ytc-hide-left-sidebar="true"] ytd-watch-flexy[is-two-columns_] #columns,
+html[data-ytc-hide-right-sidebar="true"] ytd-watch-flexy[is-two-columns_] #columns {
+  max-width: 100% !important;
+}
+
+html[data-ytc-hide-left-sidebar="true"] ytd-watch-flexy[is-two-columns_] #primary,
 html[data-ytc-hide-right-sidebar="true"] ytd-watch-flexy[is-two-columns_] #primary {
   max-width: none !important;
   width: 100% !important;
+  flex: 1 1 auto !important;
+}
+
+html[data-ytc-hide-left-sidebar="true"][data-ytc-hide-right-sidebar="true"] ytd-watch-flexy[is-two-columns_] #secondary {
+  display: none !important;
 }

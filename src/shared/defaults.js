@@ -5,7 +5,7 @@
     storageKey: "settings",
     hiddenAttribute: "data-ytc-hidden",
     hiddenReasonShorts: "shorts",
-    hiddenReasonRightSidebar: "right-sidebar",
+    hideLeftSidebarAttribute: "data-ytc-hide-left-sidebar",
     hideRightSidebarAttribute: "data-ytc-hide-right-sidebar",
     logPrefix: "[YTCleaner]"
   };
@@ -22,6 +22,7 @@
         closeOverlays: true
       },
       layout: {
+        hideLeftSidebar: true,
         hideRightSidebar: true
       },
       debug: {
