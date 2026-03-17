@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>YouTube Cleaner</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main class="popup">
+      <header class="popup__header">
+        <p class="popup__eyebrow">YouTube Cleaner</p>
+        <h1>Focus the page</h1>
+        <p class="popup__subtitle">Settings apply to open YouTube tabs without a reload.</p>
+      </header>
+
+      <section class="popup__section" aria-label="Shorts settings">
+        <label class="toggle">
+          <span>
+            <strong>Hide Shorts</strong>
+            <small>Removes common Shorts shelves, cards, and nav entries.</small>
+          </span>
+          <input id="shortsEnabled" type="checkbox">
+        </label>
+      </section>
+
+      <section class="popup__section" aria-label="Ad settings">
+        <label class="toggle">
+          <span>
+            <strong>Auto-skip ads</strong>
+            <small>Clicks visible skip controls on watch pages when available.</small>
+          </span>
+          <input id="adsAutoSkip" type="checkbox">
+        </label>
+
+        <label class="toggle">
+          <span>
+            <strong>Mute ads</strong>
+            <small>Mutes active watch-page ad sessions when skip is not ready.</small>
+          </span>
+          <input id="adsMuteWhenAdPlaying" type="checkbox">
+        </label>
+
+        <label class="toggle">
+          <span>
+            <strong>Close overlays</strong>
+            <small>Attempts to dismiss simple player overlays when a clear close button exists.</small>
+          </span>
+          <input id="adsCloseOverlays" type="checkbox">
+        </label>
+      </section>
+
+      <section class="popup__section" aria-label="Layout settings">
+        <label class="toggle">
+          <span>
+            <strong>Hide recommended videos sidebar</strong>
+            <small>Hides the full Up next and recommended sidebar on watch pages.</small>
+          </span>
+          <input id="layoutHideRightSidebar" type="checkbox">
+        </label>
+      </section>
+
+      <section class="popup__section" aria-label="Debug settings">
+        <label class="toggle">
+          <span>
+            <strong>Debug mode</strong>
+            <small>Logs route changes and feature activity to the page console.</small>
+          </span>
+          <input id="debugEnabled" type="checkbox">
+        </label>
+      </section>
+
+      <p class="popup__note">YouTube changes often, so ad and Shorts detection is best-effort.</p>
+      <p id="status" class="popup__status" role="status" aria-live="polite"></p>
+    </main>
+
+    <script src="../src/shared/defaults.js"></script>
+    <script src="../src/shared/settings.js"></script>
+    <script src="../src/shared/storage.js"></script>
+    <script src="popup.js"></script>
+  </body>
+  </html>

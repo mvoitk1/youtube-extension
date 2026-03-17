@@ -1,0 +1,17 @@
+[data-ytc-hidden="shorts"] {
+  display: none !important;
+}
+
+[data-ytc-hidden="right-sidebar"] {
+  display: none !important;
+}
+
+html[data-ytc-hide-right-sidebar="true"] ytd-watch-flexy #secondary,
+html[data-ytc-hide-right-sidebar="true"] #secondary[data-ytc-hidden="right-sidebar"] {
+  display: none !important;
+}
+
+html[data-ytc-hide-right-sidebar="true"] ytd-watch-flexy[is-two-columns_] #primary {
+  max-width: none !important;
+  width: 100% !important;
+}

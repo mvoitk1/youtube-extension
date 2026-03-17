@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Cleaner",
+  "version": "0.2.0",
+  "description": "Hide Shorts surfaces and reduce some YouTube ad friction where possible.",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://www.youtube.com/*"
+  ],
+  "action": {
+    "default_title": "YouTube Cleaner",
+    "default_popup": "popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "css": [
+        "styles/content.css"
+      ],
+      "js": [
+        "src/shared/defaults.js",
+        "src/shared/settings.js",
+        "src/shared/storage.js",
+        "src/shared/logger.js",
+        "src/shared/utils.js",
+        "src/content/router.js",
+        "src/content/navigation.js",
+        "src/content/scheduler.js",
+        "src/content/dom-observer.js",
+        "src/content/features/shorts/shorts-controller.js",
+        "src/content/features/ads/ads-controller.js",
+        "src/content/features/layout/layout-actions.js",
+        "src/content/features/layout/layout-controller.js",
+        "src/content/app-controller.js",
+        "src/content/main.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
