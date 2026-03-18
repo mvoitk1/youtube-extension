@@ -13,7 +13,13 @@
       adState: {
         isAdActive: false,
         sessionId: 0,
-        startedAt: null
+        startedAt: null,
+        skipAttempted: false,
+        overlayCloseAttempted: false,
+        mutedByExtension: false,
+        restoreBlockedByUser: false,
+        previousMuted: null,
+        previousVolume: null
       }
     };
   }
